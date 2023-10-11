@@ -1,14 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { Button, Steps, Form, Input } from "antd";
-import EditorComponent from './EditorComponent'
-
+import QQ from './QQ'
 
 const TestPage = () => {
   const [currentStep, setCurrentStep] = useState(0);
 
   const [form] = Form.useForm();
-
-  const [editorState, setEditorState] = useState(null);
 
   const handleNext = async () => {
     try {
@@ -37,7 +34,7 @@ const TestPage = () => {
     {
       title: "Step 1",
       content: (
-        <>
+        <div className="w-full h-full">
           <Form.Item
             label="商品名稱"
             name="name"
@@ -45,25 +42,15 @@ const TestPage = () => {
           >
             <Input placeholder="為您的商品命名" />
           </Form.Item>
-          {/* <Form.Item
+          <Form.Item
             label="商品描述"
             name="description"
             rules={[{ required: true, message: "請輸入商品描述!" }]}
           >
-            <Editor
-              editorState={editorState}
-              onEditorStateChange={(newEditorState) => {
-                setEditorState(newEditorState);
-              }}
-              wrapperClassName="wrapper-class"
-              editorClassName="editor-class"
-              toolbarClassName="toolbar-class"
-            />
+            <QQ/>
+          </Form.Item>
 
-            <EditorComponent />
-          </Form.Item> */}
-
-        </>
+        </div>
       ),
     },
     {
@@ -99,12 +86,12 @@ const TestPage = () => {
 
 
   return (
-    <div className="flex justify-center items-center w-[50%] h-[100%] border-solid border-[1px]">
-      <Form form={form} layout="horizontal">
+    <div className="flex justify-center items-center w-full h-full border-solid border-[1px]">
+      <Form form={form} layout="horizontal" className="flex flex-col justify-center items-center w-full h-full border-solid border-[1px]">
         <Steps current={currentStep} items={items} />
         {steps[currentStep].content}
-        <EditorComponent />
-        <div className="steps-action">
+        
+        <div className="steps-action ">
           {currentStep > 0 && (
             <Button style={{ margin: "0 8px" }} onClick={() => handleBack()} type="primary">
               Previous
